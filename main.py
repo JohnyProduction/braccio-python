@@ -4,7 +4,7 @@ import time
 import serial
 
 # Adjust the port as needed (for example, if your Arduino is on COM3)
-serArduino = serial.Serial('COM3', 9600)
+serArduino = serial.Serial('COM1', 9600)
 time.sleep(2)  # Wait for Arduino to initialize
 
 
@@ -63,7 +63,6 @@ try:
                         send_command('T')
                     last_command_time = time.time()  # Update the last command time
 
-
             elif event.type == pygame.JOYBUTTONDOWN:
                 if joystick.get_button(2):  # 'X' button on Xbox One controller
                     send_command('G')  # Open gripper
@@ -77,7 +76,12 @@ try:
                 elif joystick.get_button(0):  # 'Y' button on Xbox One controller
                     print('K')
                     send_command('K')
-
+            elif joystick.get_button(4):  # LB (Left Bumper)
+                print('P')
+                send_command('P')
+            elif joystick.get_button(5):  # RB (Right Bumper)
+                print('O')
+                send_command('O')
             elif event.type == pygame.JOYBUTTONUP:
                 # Additional logic for when a button is released, if needed
                 pass
